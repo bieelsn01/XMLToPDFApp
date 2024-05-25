@@ -14,4 +14,8 @@
     <PackageReference Include="PDFsharp" Version="1.32.3057" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>

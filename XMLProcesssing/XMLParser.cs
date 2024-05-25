@@ -10,6 +10,17 @@ namespace XMLProcessing
         public static XMLData Parse(string xmlFilePath)
         {
             var doc = XDocument.Load(xmlFilePath);
+            return ParseDocument(doc);
+        }
+
+        public static XMLData ParseFromString(string xmlContent)
+        {
+            var doc = XDocument.Parse(xmlContent);
+            return ParseDocument(doc);
+        }
+
+        private static XMLData ParseDocument(XDocument doc)
+        {
             XNamespace ns = "http://www.portalfiscal.inf.br/nfe";
 
             var data = new XMLData
@@ -44,7 +55,6 @@ namespace XMLProcessing
             };
 
             return data;
-
         }
     }
-}   
+}
