@@ -1,32 +1,24 @@
-﻿using XMLProcessing;
+﻿using System;
+using System.IO;
+using XMLProcessing;
 using HTMLGeneration;
-using PDFGeneration;
-using Utils;
 
 namespace XMLToPDFApp
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            string xmlDirectory = @"C:\Caminho\Para\Seu\Diretorio";
-            string outputDirectory = @"C:\Caminho\Para\DiretorioDeSaida";
+            string templatePath = @"C:\ws-project\Layout NFe\index.html";
+            string xmlPath = @"C:\Users\Gabriel\Desktop\NFe\v4_ComLocalEntrega.xml";
+            string outputPath = @"C:\Users\Gabriel\Desktop\Danfe\output.html";
 
-            var xmlFiles = FileManager.GetFiles(xmlDirectory, "*.xml");
+            var data = XMLParser.Parse(xmlPath);
+            string filledTemplate = HTMLGenerator.Generate(data, templatePath);
 
-            foreach (var xmlFile in xmlFiles)
-            {
-                var xmlData = XMLParser.Parse(xmlFile);
+            File.WriteAllText(outputPath, filledTemplate);
 
-                string htmlContent = HTMLGenerator.Generate(xmlData);
-
-                byte[] pdfBytes = PDFGenerator.Generate(htmlContent);
-
-                string pdfFilePath = $"{outputDirectory}\\{System.IO.Path.GetFileNameWithoutExtension(xmlFile)}.pdf";
-                FileManager.SaveFile(pdfBytes, pdfFilePath);
-            }
-
-            Console.WriteLine("Processo concluído.");
+            Console.WriteLine("HTML gerado com sucesso!");
         }
     }
 }

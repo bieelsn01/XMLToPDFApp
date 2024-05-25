@@ -1,16 +1,113 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <title>DANFE</title>
+    <meta charset="UTF-8">
+    <title>DANFE - Documento Auxiliar da Nota Fiscal Eletrônica</title>
     <style>
-        /* Adicione estilos aqui para formatar a DANFE */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            border: 1px solid #000;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            border-bottom: 1px solid #000;
+            margin-bottom: 10px;
+        }
+
+        .field {
+            margin-bottom: 5px;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
-    <h1>Nota Fiscal Eletrônica</h1>
-    <p>Campo1: {{Campo1}}</p>
-    <p>Campo2: {{Campo2}}</p>
-    <p>Chave de Acesso: {{chNFe}}</p>
-    <!-- Continue adicionando os campos conforme necessário -->
+    <div class="container">
+        <div class="header">
+            <h1>DANFE</h1>
+            <p>Documento Auxiliar da Nota Fiscal Eletrônica</p>
+        </div>
+        <div class="section">
+            <div class="section-title">Dados da NF-e</div>
+            <div class="field"><span class="label">Chave de Acesso:</span> {{chNFe}}</div>
+            <div class="field"><span class="label">Número:</span> {{nNF}}</div>
+            <div class="field"><span class="label">Data de Emissão:</span> {{dhEmi}}</div>
+        </div>
+        <div class="section">
+            <div class="section-title">Emitente</div>
+            <div class="field"><span class="label">Nome:</span> {{emitenteNome}}</div>
+            <div class="field"><span class="label">CNPJ:</span> {{emitenteCNPJ}}</div>
+            <div class="field"><span class="label">Endereço:</span> {{emitenteEndereco}}</div>
+        </div>
+        <div class="section">
+            <div class="section-title">Destinatário</div>
+            <div class="field"><span class="label">Nome:</span> {{destinatarioNome}}</div>
+            <div class="field"><span class="label">CNPJ/CPF:</span> {{destinatarioCNPJ}}</div>
+            <div class="field"><span class="label">Endereço:</span> {{destinatarioEndereco}}</div>
+        </div>
+        <div class="section">
+            <div class="section-title">Produtos</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Quantidade</th>
+                        <th>Valor Unitário</th>
+                        <th>Valor Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#produtos}}
+                    <tr>
+                        <td>{{descricao}}</td>
+                        <td>{{quantidade}}</td>
+                        <td>{{valorUnitario}}</td>
+                        <td>{{valorTotal}}</td>
+                    </tr>
+                    {{/produtos}}
+                </tbody>
+            </table>
+        </div>
+        <div class="section">
+            <div class="field"><span class="label">Valor Total da Nota:</span> {{valorTotalNota}}</div>
+        </div>
+    </div>
 </body>
 </html>
